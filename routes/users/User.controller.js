@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const UserService = require("./User.service");
 
+const authGuard = require("../middleware/auth.guard");
+
 router.post("/authenticate", (req, res, next) => {
   const { email, password } = req.body;
 
@@ -10,6 +12,8 @@ router.post("/authenticate", (req, res, next) => {
     })
     .catch(next);
 });
+
+router.use(authGuard);
 
 router.get("/all", (req, res, next) => {
   UserService.getUsers()
