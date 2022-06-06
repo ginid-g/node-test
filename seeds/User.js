@@ -9,7 +9,7 @@ async function userSeed() {
 
   await User.deleteMany({});
 
-  bcrypt.hash(user.password, 8, function (err, hash) {
+  bcrypt.hash(user.password, 8, async function (err, hash) {
     if (err) {
       console.log("User seed failed");
       console.log(err);
@@ -23,8 +23,8 @@ async function userSeed() {
 
       await newUser.save();
     } catch (error) {
-        console.log('Seed Failed');
-        console.log(error);
+      console.log("Seed Failed");
+      console.log(error);
     }
   });
 }
